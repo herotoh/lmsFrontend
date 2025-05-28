@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import MemberList from './components/MemberList';
 import MemberDetails from './components/MemberDetails';
+import MemberProfile from './components/MemberProfile';
+import Register from './components/Register';
+import Login from './components/Login';
 import './App.css';
 
 function App() {
@@ -11,34 +14,77 @@ function App() {
     <div className="App">
       <h1>Library Management System</h1>
       <Router>
+        <NavBar />
         <Routes>
           <Route
             path="/"
-            element={
-              <MemberList
-                onSelectMember={(member) => {
-                  setSelectedMember(member);
-                  window.history.pushState(null, '', '/member');
-                }}
-              />
-            }
+            element={<MemberListWrapper setSelectedMember={setSelectedMember} />}
           />
           <Route
             path="/member"
             element={
-              <MemberDetails
-                member={selectedMember}
-                onBack={() => {
-                  setSelectedMember(null);
-                  window.history.pushState(null, '', '/');
-                }}
+              <MemberDetailsWrapper
+                selectedMember={selectedMember}
+                setSelectedMember={setSelectedMember}
               />
             }
           />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login setSelectedMember={setSelectedMember} />} />
+          <Route path="/profile" element={<MemberProfile />} />
+          
         </Routes>
       </Router>
     </div>
   );
+}
+
+// Navigation bar component
+function NavBar() {
+  return (
+    <nav style={navStyle}>
+      <Link to="/" style={linkStyle}>Home</Link>
+      <Link to="/register" style={linkStyle}>Register</Link>
+      <Link to="/login" style={linkStyle}>Login</Link>
+      
+    </nav>
+  );
+}
+
+const navStyle = {
+  padding: '10px 20px',
+  marginBottom: '20px',
+  backgroundColor: '#333',
+  display: 'flex',
+  gap: '15px',
+};
+
+const linkStyle = {
+  color: 'white',
+  textDecoration: 'none',
+  fontWeight: 'bold',
+};
+
+function MemberListWrapper({ setSelectedMember }) {
+  const navigate = useNavigate();
+
+  const handleSelectMember = (member) => {
+    setSelectedMember(member);
+    navigate('/member');
+  };
+
+  return <MemberList onSelectMember={handleSelectMember} />;
+}
+
+function MemberDetailsWrapper({ selectedMember, setSelectedMember }) {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    setSelectedMember(null);
+    navigate('/');
+  };
+
+  return <MemberDetails member={selectedMember} onBack={handleBack} />;
 }
 
 export default App;
