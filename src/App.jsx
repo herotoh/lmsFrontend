@@ -24,7 +24,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
                     <Route path="/member" element={<PrivateRoute><MemberDetails /></PrivateRoute>} />
-                    <Route path="/profile" element={<PrivateRoute><MemberProfile /></PrivateRoute>} />
+                    <Route path="/profile" element={<MemberProfile />} />
                     <Route path="/booksAvailable" element={<PrivateRoute><BooksAvailable /></PrivateRoute>} />
                     <Route path="/borrowedBooks" element={<PrivateRoute><BorrowedBooks /></PrivateRoute>} />
                     <Route path="/addBook" element={<PrivateRoute><AddBook /></PrivateRoute>} />
@@ -34,6 +34,7 @@ function App() {
         </div>
     );
 }
+//<Route path="/profile" element={<PrivateRoute><MemberProfile /></PrivateRoute>} />
 
 const Home = () => {
   return (

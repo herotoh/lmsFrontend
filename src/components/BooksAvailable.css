@@ -1,0 +1,49 @@
+/* BooksAvailable.css */
+
+.books-available-container {
+  font-family: sans-serif;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.books-available-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.books-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.book-item {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.book-item:last-child {
+  border-bottom: none;
+}
+
+.book-item strong {
+  font-weight: bold;
+  color: #0056b3; /* A slightly darker blue for emphasis */
+}
+
+.error-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+  border: 1px solid #d88282;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Optional: Add some styling for the loading message */
+.books-available-container p {
+  font-style: italic;
+  color: #777;
+}

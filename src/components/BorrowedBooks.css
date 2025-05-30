@@ -1,0 +1,49 @@
+/* BorrowedBooks.css */
+
+.borrowed-books-container {
+  font-family: sans-serif;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.borrowed-books-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.borrowed-books-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.borrowed-book-item {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.borrowed-book-item:last-child {
+  border-bottom: none;
+}
+
+.borrowed-book-item strong {
+  font-weight: bold;
+  color: #0056b3;
+}
+
+.error-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+  border: 1px solid #d88282;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Optional: Styling for the loading/login messages */
+.borrowed-books-container p {
+  font-style: italic;
+  color: #777;
+}

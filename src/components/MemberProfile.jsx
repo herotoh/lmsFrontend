@@ -2,18 +2,23 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const MemberProfile = () => {
+  console.log("MemberProfile: Component mounted"); // ADD THIS LINE
   const [member, setMember] = useState(null);
 
   useEffect(() => {
+     console.log("MemberProfile: useEffect triggered"); // ADD THIS LINE
     axios.get('http://localhost:8080/api/members/me', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}` // If JWT auth
       }
     }).then(response => {
+       console.log("MemberProfile: axios.get success:", response); // ADD THIS
       setMember(response.data);
     }).catch(error => {
+      console.error("MemberProfile: axios.get error:", error); // ADD THIS      
       console.error("Error fetching member details:", error);
     });
+    console.log("MemberProfile: After axios.get"); // ADD THIS
   }, []);
 
   if (!member) return <p>Loading...</p>;
