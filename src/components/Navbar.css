@@ -1,0 +1,47 @@
+.navbar {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.navbar-links {
+    display: flex;
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.navbar-link:hover {
+    text-decoration: underline;
+}
+
+.navbar-auth {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-welcome {
+    margin-right: 10px;
+}
+
+.navbar-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.navbar-button:hover {
+    background-color: #cc0000;
+}

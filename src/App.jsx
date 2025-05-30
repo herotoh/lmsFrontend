@@ -1,90 +1,47 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MemberList from './components/MemberList';
 import MemberDetails from './components/MemberDetails';
 import MemberProfile from './components/MemberProfile';
 import Register from './components/Register';
 import Login from './components/Login';
+import Navbar from './components/Navbar';
+import BooksAvailable from './components/BooksAvailable';
+import BorrowedBooks from './components/BorrowedBooks';
+import AddBook from './components/AddBook';
+import NotFound from './components/NotFound'; // Import NotFound
+import PrivateRoute from './components/PrivateRoute'; // Import PrivateRoute
 import './App.css';
 
 function App() {
-  const [selectedMember, setSelectedMember] = useState(null);
+    return (
+        <div className="App">
+            <h1>Library Management System</h1>
+            <Router>
+                <Navbar />
+                <Routes>
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+                    <Route path="/member" element={<PrivateRoute><MemberDetails /></PrivateRoute>} />
+                    <Route path="/profile" element={<PrivateRoute><MemberProfile /></PrivateRoute>} />
+                    <Route path="/booksAvailable" element={<PrivateRoute><BooksAvailable /></PrivateRoute>} />
+                    <Route path="/borrowedBooks" element={<PrivateRoute><BorrowedBooks /></PrivateRoute>} />
+                    <Route path="/addBook" element={<PrivateRoute><AddBook /></PrivateRoute>} />
+                    <Route path="*" element={<NotFound />} /> {/* Add NotFound route */}
+                </Routes>
+            </Router>
+        </div>
+    );
+}
 
+const Home = () => {
   return (
-    <div className="App">
-      <h1>Library Management System</h1>
-      <Router>
-        <NavBar />
-        <Routes>
-          <Route
-            path="/"
-            element={<MemberListWrapper setSelectedMember={setSelectedMember} />}
-          />
-          <Route
-            path="/member"
-            element={
-              <MemberDetailsWrapper
-                selectedMember={selectedMember}
-                setSelectedMember={setSelectedMember}
-              />
-            }
-          />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login setSelectedMember={setSelectedMember} />} />
-          <Route path="/profile" element={<MemberProfile />} />
-          
-        </Routes>
-      </Router>
+    <div>
+      <h2>Welcome to the Library Management System!</h2>
+      {/* You can add more content here for the home page */}
     </div>
   );
-}
-
-// Navigation bar component
-function NavBar() {
-  return (
-    <nav style={navStyle}>
-      <Link to="/" style={linkStyle}>Home</Link>
-      <Link to="/register" style={linkStyle}>Register</Link>
-      <Link to="/login" style={linkStyle}>Login</Link>
-      
-    </nav>
-  );
-}
-
-const navStyle = {
-  padding: '10px 20px',
-  marginBottom: '20px',
-  backgroundColor: '#333',
-  display: 'flex',
-  gap: '15px',
 };
-
-const linkStyle = {
-  color: 'white',
-  textDecoration: 'none',
-  fontWeight: 'bold',
-};
-
-function MemberListWrapper({ setSelectedMember }) {
-  const navigate = useNavigate();
-
-  const handleSelectMember = (member) => {
-    setSelectedMember(member);
-    navigate('/member');
-  };
-
-  return <MemberList onSelectMember={handleSelectMember} />;
-}
-
-function MemberDetailsWrapper({ selectedMember, setSelectedMember }) {
-  const navigate = useNavigate();
-
-  const handleBack = () => {
-    setSelectedMember(null);
-    navigate('/');
-  };
-
-  return <MemberDetails member={selectedMember} onBack={handleBack} />;
-}
 
 export default App;
