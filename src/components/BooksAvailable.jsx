@@ -4,6 +4,7 @@ import { bookApi } from '../api'; // Import bookApi
 import { loanApi } from '../api'; // Import your loan API functions (you'll need to create these)
 import { useSelector } from 'react-redux'; // If you're using Redux for user auth
 
+
 import './BooksAvailable.css'; // Import the CSS file
 
 const BooksAvailable = () => {
@@ -11,7 +12,8 @@ const BooksAvailable = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const user = useSelector(state => state.user); // Assuming you have a user slice in your Redux store
-    const [member, setMember] = useState(null); // Assuming you have a member object in your Redux store
+    //const member = useSelector(state => state.member); // Assuming you have a user slice in your Redux store
+    //const [member, setMember] = useState(null); // Assuming you have a member object in your Redux store
   //const userString = localStorage.getItem('user'); // Get the JSON string
   //const user = userString ? JSON.parse(userString) : null; // Parse it back to an object
 
@@ -24,8 +26,8 @@ const BooksAvailable = () => {
             return;
         }
 
-       if (!member || !member.id) {
-            console.error("Error: Member information is incomplete 1.", user);
+       if (!user.member || !user.member.id) {
+            console.error("Error: Member information is incomplete 1.", user.member);
             
             setError("Could not borrow book 1. User information is incomplete.");
             return;
@@ -45,8 +47,9 @@ const BooksAvailable = () => {
 
 
         try {
-            console.error("TRY :");
-            await loanApi.borrowBook(bookId, member.id); // Assuming backend expects bookId and memberId
+            console.error("** bookId :" + bookId);
+            console.error("** memberId :" + user.member.id);
+            await loanApi.borrowBook(bookId, user.member.id); // Assuming backend expects bookId and memberId
             // Optimistically update availableCopies in the UI
             console.error("TRY 2:");
             setBooks(prevBooks =>
