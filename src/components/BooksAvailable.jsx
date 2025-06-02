@@ -12,6 +12,8 @@ const BooksAvailable = () => {
             try {
                 setLoading(true);
                 const data = await bookApi.getAvailableBooks();
+                console.log('\nAPI Response Data:', data); // Log the response
+                console.log('\n \n '); // Log the response
                 setBooks(data);
             } catch (err) {
                 console.error('Error fetching available books:', err);
