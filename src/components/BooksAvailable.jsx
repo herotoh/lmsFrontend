@@ -21,11 +21,13 @@ const BooksAvailable = () => {
 
 
     const handleBorrowBook = async (bookId) => {
+        /**
         if (!user || !user.token) {
             setError("Please log in to borrow books.");
             return;
         }
-
+         */
+        
        if (!user.member || !user.member.id) {
             console.error("Error: Member information is incomplete 1.", user.member);
             

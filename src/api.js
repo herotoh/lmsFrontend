@@ -8,11 +8,34 @@ const handleResponse = (response) => {
     throw new Error(response.statusText || `Request failed with status ${response.status}`);
 };
 
+const getAuthHeader = () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+        return { Authorization: `Bearer ${JSON.parse(user).token}` };
+    } else {
+        return {};
+    }
+};
+
 // Generic API request functions
-const get = (url, params = {}) => api.get(url, { params }).then(handleResponse);
-const post = (url, data = {}) => api.post(url, data).then(handleResponse);
-const put = (url, data = {}) => api.put(url, data).then(handleResponse);
-const del = (url) => api.delete(url).then(handleResponse);
+//const get = (url, params = {}) => api.get(url, { params }).then(handleResponse);
+//const post = (url, data = {}) => api.post(url, data).then(handleResponse);
+//const put = (url, data = {}) => api.put(url, data).then(handleResponse);
+//const del = (url) => api.delete(url).then(handleResponse);
+
+const get = (url, params = {}) =>
+    api.get(url, { params, headers: getAuthHeader() }).then(handleResponse);
+
+const post = (url, data = {}) =>
+    api.post(url, data, { headers: getAuthHeader() }).then(handleResponse);
+
+const put = (url, data = {}) =>
+    api.put(url, data, { headers: getAuthHeader() }).then(handleResponse);
+
+const del = (url) =>
+    api.delete(url, { headers: getAuthHeader() }).then(handleResponse);
+
+
 
 // Library Management Specific API Calls
 const authApi = {
