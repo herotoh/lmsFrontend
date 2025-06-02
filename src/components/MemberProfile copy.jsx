@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
+
+
+
+
 const MemberProfile = () => {
  console.log("MemberProfile: Component mounted");
  const [member, setMember] = useState(null);

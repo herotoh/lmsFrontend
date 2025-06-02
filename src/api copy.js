@@ -1,37 +1,28 @@
 import api from './axiosConfig'; // Import the configured Axios instance
 
 const handleResponse = (response) => {
-    if (!response || typeof response !== 'object') {
-        throw new Error("Invalid response from server.");
-    }
-
     if (response.status >= 200 && response.status < 300) {
-        if (response.data === null || response.data === undefined) {
-            throw new Error("Empty response data.");
-        }
         return response.data;
     }
-
-    // For non-2xx responses
+    // For non-2xx responses, throw an error with more details
     throw new Error(response.statusText || `Request failed with status ${response.status}`);
 };
 
 const getAuthHeader = () => {
     const user = localStorage.getItem('user');
     if (user) {
-        const parsedUser = JSON.parse(user);
-        if (parsedUser.token) {
-            return { Authorization: `Bearer ${parsedUser.token}` };
-        } else {
-            console.warn("Token is missing in user object.");
-        }
+        return { Authorization: `Bearer ${JSON.parse(user).token}` };
     } else {
-        console.warn("No user found in localStorage.");
+        return {};
     }
-    return {};
 };
 
 // Generic API request functions
+//const get = (url, params = {}) => api.get(url, { params }).then(handleResponse);
+//const post = (url, data = {}) => api.post(url, data).then(handleResponse);
+//const put = (url, data = {}) => api.put(url, data).then(handleResponse);
+//const del = (url) => api.delete(url).then(handleResponse);
+
 const get = (url, params = {}) =>
     api.get(url, { params, headers: getAuthHeader() }).then(handleResponse);
 
@@ -44,8 +35,9 @@ const put = (url, data = {}) =>
 const del = (url) =>
     api.delete(url, { headers: getAuthHeader() }).then(handleResponse);
 
-// Library Management Specific API Calls
 
+
+// Library Management Specific API Calls
 const authApi = {
     login: (credentials) => post('/auth/login', credentials),
     register: (userData) => post('/auth/register', userData),
@@ -58,7 +50,7 @@ const bookApi = {
     updateBook: (id, bookData) => put(`/books/${id}`, bookData),
     deleteBook: (id) => del(`/books/${id}`),
     getAvailableBooks: () => get('/books/available'),
-    searchBooks: (params) => get('/books/search', params),
+    searchBooks: (params) => get('/books/search', params) // Generic search
 };
 
 const memberApi = {
@@ -67,7 +59,7 @@ const memberApi = {
     getMemberProfile: () => get('/members/me'),
     createMember: (memberData) => post('/members', memberData),
     updateMember: (id, memberData) => put(`/members/${id}`, memberData),
-    deleteMember: (id) => del(`/members/${id}`),
+    deleteMember: (id) => del(`/members/${id}`)
 };
 
 const loanApi = {
@@ -76,9 +68,9 @@ const loanApi = {
     createLoan: (loanData) => post('/loans/borrow', loanData),
     returnLoan: (loanId) => put(`/loans/return/${loanId}`),
     deleteLoan: (id) => del(`/loans/${id}`),
-    getLoansByMemberId: (memberId) => get(`/loans/member/${memberId}`),
+    getLoansByMemberId: (memberId) => get(`/loans/member/${memberId}`), // Corrected URL
     getOverdueLoans: () => get('/loans/overdue'),
-    borrowBook: (bookId, memberId) => post('/loans/borrow', { bookId, memberId }),
+    borrowBook: (bookId, memberId) => post('/loans/borrow', { bookId, memberId })    
 };
 
 export { authApi, bookApi, memberApi, loanApi };
