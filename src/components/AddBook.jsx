@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../axiosConfig';
+import './AddBook.css'; // Import the CSS file
 
 const AddBook = () => {
     const [book, setBook] = useState({
@@ -11,6 +12,20 @@ const AddBook = () => {
     });
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
+    const remarks = {
+        title: 'Title is mandatory.',
+        author: 'Author is mandatory.',
+        isbn: 'ISBN is mandatory & unique.',
+        publisher: 'mandatory',
+        category: 'Select the genre of the book.',
+        language: 'mandatory',
+        yearPublished: 'Between 1450 - 2100.',
+        description: 'Enter a brief description of the book.',
+        totalCopies: 'Total copies must be zero or more.',
+        availableCopies: 'Available copies must be zero or more.',
+        shelfLocation: 'Enter the location of the book on the shelves.',
+        coverImageUrl: 'Enter the URL of the book\'s cover image.'
+    };
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -55,29 +70,29 @@ const AddBook = () => {
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="title">Title:</label><br />
-                    <input type="text" id="title" name="title" value={book.title} onChange={handleChange} required />
+                <div className="form-row">
+                    <label htmlFor="title">Title:</label>
+                    <input type="text" id="title" name="title" value={book.title} onChange={handleChange} required data-remark={remarks.title} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="author">Author:</label><br />
-                    <input type="text" id="author" name="author" value={book.author} onChange={handleChange} required />
+                <div className="form-row">
+                    <label htmlFor="author">Author:</label>
+                    <input type="text" id="author" name="author" value={book.author} onChange={handleChange} required data-remark={remarks.author} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="isbn">ISBN:</label><br />
-                    <input type="text" id="isbn" name="isbn" value={book.isbn} onChange={handleChange} required />
+                <div className="form-row">
+                    <label htmlFor="isbn">ISBN:</label>
+                    <input type="text" id="isbn" name="isbn" value={book.isbn} onChange={handleChange} required data-remark={remarks.isbn} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="publisher">Publisher:</label><br />
-                    <input type="text" id="publisher" name="publisher" value={book.publisher} onChange={handleChange} />
+                <div className="form-row">
+                    <label htmlFor="publisher">Publisher:</label>
+                    <input type="text" id="publisher" name="publisher" value={book.publisher} onChange={handleChange} data-remark={remarks.publisher} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="category">Category:</label><br />
-                    <select id="category" name="category" value={book.category} onChange={handleChange}>
+                <div className="form-row">
+                    <label htmlFor="category">Category:</label>
+                    <select id="category" name="category" value={book.category} onChange={handleChange} data-remark={remarks.category}>
                         <option value="FICTION">Fiction</option>
                         <option value="NON_FICTION">Non-Fiction</option>
                         <option value="SCIENCE">Science</option>
@@ -86,9 +101,9 @@ const AddBook = () => {
                     </select>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="language">Language:</label><br />
-                    <select id="language" name="language" value={book.language} onChange={handleChange}>
+                <div className="form-row">
+                    <label htmlFor="language">Language:</label>
+                    <select id="language" name="language" value={book.language} onChange={handleChange} data-remark={remarks.language}>
                         <option value="ENGLISH">English</option>
                         <option value="CHINESE">Chinese</option>
                         <option value="MALAY">Malay</option>
@@ -96,34 +111,34 @@ const AddBook = () => {
                     </select>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="yearPublished">Year Published:</label><br />
-                    <input type="number" id="yearPublished" name="yearPublished" value={book.yearPublished} onChange={handleChange} />
+                <div className="form-row">
+                    <label htmlFor="yearPublished">Year Published:</label>
+                    <input type="number" id="yearPublished" name="yearPublished" value={book.yearPublished} onChange={handleChange} data-remark={remarks.yearPublished} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="description">Description:</label><br />
-                    <textarea id="description" name="description" value={book.description} onChange={handleChange} />
+                <div className="form-row description-row">
+                    <label htmlFor="description">Description:</label>
+                    <textarea id="description" name="description" value={book.description} onChange={handleChange} data-remark={remarks.description} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="totalCopies">Total Copies:</label><br />
-                    <input type="number" id="totalCopies" name="totalCopies" min="1" value={book.totalCopies} onChange={handleChange} required />
+                <div className="form-row">
+                    <label htmlFor="totalCopies">Total Copies:</label>
+                    <input type="number" id="totalCopies" name="totalCopies" min="1" value={book.totalCopies} onChange={handleChange} required data-remark={remarks.totalCopies} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="availableCopies">Available Copies:</label><br />
-                    <input type="number" id="availableCopies" name="availableCopies" min="0" value={book.availableCopies} onChange={handleChange} required />
+                <div className="form-row">
+                    <label htmlFor="availableCopies">Available Copies:</label>
+                    <input type="number" id="availableCopies" name="availableCopies" min="0" value={book.availableCopies} onChange={handleChange} required data-remark={remarks.availableCopies} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="shelfLocation">Shelf Location:</label><br />
-                    <input type="text" id="shelfLocation" name="shelfLocation" value={book.shelfLocation} onChange={handleChange} />
+                <div className="form-row">
+                    <label htmlFor="shelfLocation">Shelf Location:</label>
+                    <input type="text" id="shelfLocation" name="shelfLocation" value={book.shelfLocation} onChange={handleChange} data-remark={remarks.shelfLocation} />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="coverImageUrl">Cover Image URL:</label><br />
-                    <input type="text" id="coverImageUrl" name="coverImageUrl" value={book.coverImageUrl} onChange={handleChange} />
+                <div className="form-row">
+                    <label htmlFor="coverImageUrl">Cover Image URL:</label>
+                    <input type="text" id="coverImageUrl" name="coverImageUrl" value={book.coverImageUrl} onChange={handleChange} data-remark={remarks.coverImageUrl} />
                 </div>
 
                 <button type="submit" className="add-book-button">Add Book</button>
