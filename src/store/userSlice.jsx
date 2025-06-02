@@ -6,6 +6,7 @@ const savedUser = JSON.parse(localStorage.getItem('user')) || {
   username: null,
   roles: [],
   token: null, // This 'token' in state will now be the actual JWT string
+  member: null // Ensure this is initialized correctly
 };
 
 const userSlice = createSlice({
@@ -14,15 +15,17 @@ const userSlice = createSlice({
   reducers: {
     loginUser: (state, action) => {
       // Now action.payload will be the LoginResponse object from backend
-      const { token, username, roles } = action.payload; // Destructure directly
+      const { token, username, roles, member  } = action.payload; // Destructure directly
 
       // Update state
       state.token = token;
       state.username = username;
       state.roles = roles || [];
+      state.member = member;
 
       // ✅ Save to localStorage (if you want to persist this info)
-      localStorage.setItem('user', JSON.stringify({ token, username, roles }));
+      //localStorage.setItem('user', JSON.stringify({ token, username, roles,  }));
+      localStorage.setItem('user', JSON.stringify({ token, username, roles, member: state.member }));
     },
     logoutUser: (state) => {
       // ✅ Clear localStorage
@@ -30,6 +33,7 @@ const userSlice = createSlice({
       state.token = null;
       state.username = null;
       state.roles = [];
+      state.member = null;
     },
   },
 });

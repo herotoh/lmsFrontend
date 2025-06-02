@@ -20,7 +20,7 @@ const MemberProfile = () => {
 
   //alert(`member check : ${member.name}`);
  // alert(`userString check : ${userString}`);
-
+console.log("username: " + name);  // Log the token
 
   console.log("MemberProfile: Token from localStorage:", token);
  // alert(`Token check 2: ${token}`); // Debugging alert

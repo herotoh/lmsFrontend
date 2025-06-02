@@ -44,8 +44,10 @@ const loanApi = {
     getLoan: (id) => get(`/loans/${id}`),
     createLoan: (loanData) => post('/loans/borrow', loanData),
     returnLoan: (loanId) => put(`/loans/return/${loanId}`),
+    deleteLoan: (id) => del(`/loans/${id}`),
     getLoansByMemberId: (memberId) => get(`/loans/member/${memberId}`), // Corrected URL
-    getOverdueLoans: () => get('/loans/overdue')
+    getOverdueLoans: () => get('/loans/overdue'),
+    borrowBook: (bookId, memberId) => post('/loans/borrow', { bookId, memberId })    
 };
 
 export { authApi, bookApi, memberApi, loanApi };

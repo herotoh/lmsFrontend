@@ -8,6 +8,7 @@ const BorrowedBooks = () => {
     const [loans, setLoans] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [member, setMember] = useState(null);
 
     useEffect(() => {
         const fetchBorrowedBooks = async () => {

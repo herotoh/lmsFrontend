@@ -4,9 +4,12 @@ import { logoutUser } from './store/userSlice'; // ✅ Import logoutUser
 
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api', // Your base URL
+    /** BASE URL */
+    baseURL: 'http://localhost:8080/api', 
     withCredentials: true, // Crucial for sending cookies
+    
 });
+console.log("axios.create: " + api.baseURL);  // Log the token
 
 // Request interceptor (for HttpOnly cookies - token is automatically included)
 api.interceptors.request.use(
