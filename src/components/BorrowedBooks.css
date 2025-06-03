@@ -1,49 +1,46 @@
-/* BorrowedBooks.css */
-
-.borrowed-books-container {
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+.borrowed-books-layout {
+  display: flex;
+  padding: 1rem;
+  gap: 2rem;
 }
 
-.borrowed-books-container h2 {
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
+.book-list-column {
+  flex: 1;
+  max-width: 300px;
+  border-right: 1px solid #ccc;
+  padding-right: 1rem;
 }
 
-.borrowed-books-list {
-  list-style-type: none;
+.book-list {
+  list-style: none;
   padding: 0;
 }
 
-.borrowed-book-item {
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
+.book-list-item {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: #f4f4f4;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.borrowed-book-item:last-child {
-  border-bottom: none;
+.book-list-item:hover {
+  background: #e6e6e6;
 }
 
-.borrowed-book-item strong {
-  font-weight: bold;
-  color: #0056b3;
+.book-list-item.selected {
+  background: #d3eafd;
 }
 
-.error-message {
-  color: #d8000c;
-  background-color: #ffbaba;
-  border: 1px solid #d88282;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+.book-detail-column {
+  flex: 2;
+  padding-left: 1rem;
 }
 
-/* Optional: Styling for the loading/login messages */
-.borrowed-books-container p {
-  font-style: italic;
-  color: #777;
+.book-details {
+  background: #fff7e6;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
 }

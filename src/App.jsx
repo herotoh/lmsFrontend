@@ -11,6 +11,7 @@ import BorrowedBooks from './components/BorrowedBooks';
 import AddBook from './components/AddBook';
 import NotFound from './components/NotFound'; // Import NotFound
 import PrivateRoute from './components/PrivateRoute'; // Import PrivateRoute
+//import Loans from './components/Loans.jsx.chat';
 import './App.css';
 
 function App() {
@@ -27,15 +28,16 @@ function App() {
                     <Route path="/profile" element={<MemberProfile />} />
                     <Route path="/booksAvailable" element={<PrivateRoute><BooksAvailable /></PrivateRoute>} />
                     <Route path="/borrowedBooks" element={<PrivateRoute><BorrowedBooks /></PrivateRoute>} />
-                    <Route path="/addBook" element={<PrivateRoute><AddBook /></PrivateRoute>} />
-                    <Route path="*" element={<NotFound />} /> {/* Add NotFound route */}
+                    <Route path="/addBook" element={<PrivateRoute><AddBook /></PrivateRoute>} />                    
+                    <Route path="*" element={<NotFound />} /> {/* Add NotFound route */}                
+                    
                 </Routes>
             </Router>
         </div>
     );
 }
 //<Route path="/profile" element={<PrivateRoute><MemberProfile /></PrivateRoute>} />
-
+//<Route path="/loans" element={<PrivateRoute><Loans /></PrivateRoute>} />                    
 const Home = () => {
   return (
     <div>

@@ -25,7 +25,8 @@ const Navbar = () => {
                 {isAuthenticated && <Link to="/addBook" className="navbar-link">Add Book</Link>}
                 <Link to="/booksAvailable" className="navbar-link">Books Available</Link>
                 {isAuthenticated && <Link to="/borrowedBooks" className="navbar-link">My Borrowed Books</Link>}
-                {isAuthenticated && <Link to="/profile" className="navbar-link">My Profile</Link>}
+                {isAuthenticated && <Link to="/profile" className="navbar-link">My Profile</Link>}                                
+                
             </div>
             {isAuthenticated && (
                 <div className="navbar-auth">
@@ -36,5 +37,7 @@ const Navbar = () => {
         </nav>
     );
 };
+//{isAuthenticated && <Link to="/loans" className="navbar-link">My Loans</Link>}
+//{isAuthenticated && <Link to="/loans" className="navbar-link">My Loans</Link>}
 
 export default Navbar;

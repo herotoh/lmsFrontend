@@ -13,49 +13,35 @@ function Login() {
     const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent form reload
+        e.preventDefault();
         setError(null);
+                  const credentials = { username, password }; // Declare 'credentials'
 
+        // Log the input credentials
+        console.log('Login: Attempting login with username:', username, 'password:', password);
+      console.log('Login: Sending credentials:', credentials); // Add this line
+      console.log('Login: Sending credentials:', JSON.stringify(credentials)); // Use JSON.stringify
         try {
-            console.log('Login: Attempting login with username:', username);
+            const response = await api.post('/auth/login', { username, password });
+            console.log('Login: Full response:', response); // Log the entire response
+            console.log('Login: Response data:', response.data); // Log just the data
 
-            // 1. Send login request to backend
-            const loginResponse = await api.post('/auth/login', { username, password });
-            const loginData = loginResponse.data; // Contains token, username, roles
-
-            console.log('Login successful. Received login data:', loginData);
-
-            // 2. Fetch full member details using the username (assumed to be member ID)
-            const memberId = loginData.username; // Backend uses username as memberId
-            const memberResponse = await api.get(`/members/${memberId}`);
-            const memberData = memberResponse.data;
-
-            console.log('Fetched member info from backend:', memberData);
-
-            // 3. Combine login data with full member details
-            const fullUserData = {
-                token: loginData.token,
-                username: loginData.username,
-                roles: loginData.roles,
-                member: memberData, // now user.member.id will exist
-            };
-
-            // 4. Save user in Redux
-            dispatch(loginUser(fullUserData));
-
-            // 5. Redirect to booksAvailable page
+            dispatch(loginUser(response.data));
             navigate('/booksAvailable');
-        } catch (err) {
-            console.error('Login error:', err);
 
+        } catch (err) {
+            console.error('Login: Login error:', err);
+            console.error('Login: Full error object:', err); // Log the entire error
             if (err.response) {
-                console.error('Error response:', err.response);
+                console.error('Login: Error response status:', err.response.status); // Log status code
+                console.error('Login: Error response headers:', err.response.headers); // Log headers
+                console.error('Login: Error response data:', err.response.data);   // Log response body
                 setError(err.response?.data?.message || 'Login failed');
             } else if (err.request) {
-                console.error('No response from server:', err.request);
+                console.error('Login: No response received. Request was:', err.request);
                 setError('No response from server. Please check your connection.');
             } else {
-                console.error('Error setting up request:', err.message);
+                console.error('Login: Error setting up the request:', err.message);
                 setError('An unexpected error occurred.');
             }
         }

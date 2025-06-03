@@ -1,0 +1,46 @@
+.profile-grid-container {
+  display: flex;
+  gap: 2rem;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.profile-section {
+  flex: 1;
+  min-width: 350px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.member-info {
+  border: 2px solid #0077cc;
+}
+
+.user-info {
+  border: 2px solid #444;
+}
+
+.profile-field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.profile-field-row label {
+  font-weight: bold;
+  width: 40%;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.profile-field-row input,
+.profile-field-row select,
+.profile-field-row span {
+  flex: 1;
+}
+
+.profile-actions button {
+  margin-right: 10px;
+}

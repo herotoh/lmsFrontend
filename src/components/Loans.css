@@ -1,0 +1,30 @@
+/* Loans.css */
+.loans-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.loans-list {
+    list-style: none;
+    padding: 0;
+}
+
+.loan-item {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.loan-item:last-child {
+    border-bottom: none;
+}
+
+.fine {
+    color: red;
+}
+
+.error-message {
+    color: red;
+}

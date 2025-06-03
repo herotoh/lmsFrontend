@@ -1,0 +1,85 @@
+//from chatgpt
+
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMemberLoans, returnBook, payFine } from '../store/loanSlice';
+
+const LoanPage = () => {
+  const dispatch = useDispatch();
+  const { loans, loading, error } = useSelector((state) => state.loan);
+  const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (user?.member?.id) {
+      dispatch(fetchMemberLoans(user.member.id));
+    }
+  }, [dispatch, user]);
+
+  const handleReturnBook = (loanId) => {
+    dispatch(returnBook(loanId));
+  };
+
+  const handlePayFine = (loanId) => {
+    dispatch(payFine(loanId));
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return (
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4">My Loans & Fines</h2>
+      {loans.length === 0 ? (
+        <p>No loans found.</p>
+      ) : (
+        <table className="w-full border border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="p-2 border">Book</th>
+              <th className="p-2 border">Issue Date</th>
+              <th className="p-2 border">Due Date</th>
+              <th className="p-2 border">Return Date</th>
+              <th className="p-2 border">Status</th>
+              <th className="p-2 border">Fine</th>
+              <th className="p-2 border">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loans.map((loan) => (
+              <tr key={loan.id}>
+                <td className="p-2 border">{loan.book?.title}</td>
+                <td className="p-2 border">{loan.issueDate}</td>
+                <td className="p-2 border">{loan.dueDate}</td>
+                <td className="p-2 border">{loan.returnDate || '—'}</td>
+                <td className="p-2 border">{loan.status}</td>
+                <td className="p-2 border">${loan.fine?.toFixed(2) || '0.00'}</td>
+                <td className="p-2 border">
+                  {loan.status === 'BORROWED' && (
+                    <button
+                      className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                      onClick={() => handleReturnBook(loan.id)}
+                    >
+                      Return
+                    </button>
+                  )}
+                  {loan.fine > 0 && (
+                    <button
+                      className="bg-green-500 text-white px-2 py-1 rounded"
+                      onClick={() => handlePayFine(loan.id)}
+                    >
+                      Pay Fine
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+};
+
+export default LoanPage;
+
+

@@ -12,12 +12,13 @@ const BooksAvailable = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const user = useSelector(state => state.user); // Assuming you have a user slice in your Redux store
+
     //const member = useSelector(state => state.member); // Assuming you have a user slice in your Redux store
     //const [member, setMember] = useState(null); // Assuming you have a member object in your Redux store
-  //const userString = localStorage.getItem('user'); // Get the JSON string
-  //const user = userString ? JSON.parse(userString) : null; // Parse it back to an object
+    //const userString = localStorage.getItem('user'); // Get the JSON string
+    //const user = userString ? JSON.parse(userString) : null; // Parse it back to an object
 
-  //const name = user ? user.username : null; // Safely access the token
+    //const name = user ? user.username : null; // Safely access the token
 
 
     const handleBorrowBook = async (bookId) => {

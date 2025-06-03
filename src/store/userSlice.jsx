@@ -27,6 +27,8 @@ const userSlice = createSlice({
       //localStorage.setItem('user', JSON.stringify({ token, username, roles,  }));
       localStorage.setItem('user', JSON.stringify({ token, username, roles, member: state.member }));
     },
+
+    
     logoutUser: (state) => {
       // ✅ Clear localStorage
       localStorage.removeItem('user');

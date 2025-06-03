@@ -1,0 +1,103 @@
+// Loans.jsx
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loanApi } from '../api';
+import './Loans.css'; // Create a CSS file for styling
+
+const Loans = () => {
+    const user = useSelector((state) => state.user);
+    const [loans, setLoans] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchLoans = async () => {
+            if (!user || !user.token) {
+                setError("Please log in to view loans.");
+                setLoading(false);
+                navigate('/login');
+                return;
+            }
+
+            try {
+                setLoading(true);
+                const data = await loanApi.getLoansByMemberId(user.member.id);
+                setLoans(data);
+            } catch (err) {
+                console.error("Error fetching loans:", err);
+                setError("Could not load loans.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchLoans();
+    }, [user, navigate]);
+
+    const handleReturnBook = async (loanId) => {
+        try {
+            await loanApi.returnLoan(loanId);
+            // Optimistically update UI
+            setLoans(prevLoans =>
+                prevLoans.map(loan =>
+                    loan.id === loanId ? { ...loan, status: 'RETURNED' } : loan
+                )
+            );
+            alert("Book returned successfully!");
+        } catch (err) {
+            console.error("Error returning book:", err);
+            setError("Could not return book.");
+        }
+    };
+
+    const handlePayFine = async (loanId) => {
+        try {
+            await loanApi.returnLoan(loanId, true); // Indicate fine is paid
+            // Optimistically update UI
+            setLoans(prevLoans =>
+                prevLoans.map(loan =>
+                    loan.id === loanId ? { ...loan, fine: 0 } : loan
+                )
+            );
+            alert("Fine paid successfully!");
+        } catch (err) {
+            console.error("Error paying fine:", err);
+            setError("Could not pay fine.");
+        }
+    };
+
+    if (loading) return <p>Loading loan information...</p>;
+    if (error) return <p className="error-message">{error}</p>;
+
+    return (
+        <div className="loans-container">
+            <h2>My Loans</h2>
+            {loans.length === 0 ? (
+                <p>You have no current loans.</p>
+            ) : (
+                <ul className="loans-list">
+                    {loans.map(loan => (
+                        <li key={loan.id} className="loan-item">
+                            <strong>{loan.book.title}</strong> by {loan.book.author}
+                            <p>Due Date: {loan.dueDate}</p>
+                            <p>Status: {loan.status}</p>
+                            {loan.fine > 0 && (
+                                <p className="fine">Fine: ${loan.fine}</p>
+                            )}
+                            {loan.status === 'BORROWED' && (
+                                <button onClick={() => handleReturnBook(loan.id)}>Return Book</button>
+                            )}
+                            {loan.fine > 0 && (
+                                <button onClick={() => handlePayFine(loan.id)}>Pay Fine</button>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+};
+
+export default Loans;
