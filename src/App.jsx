@@ -11,6 +11,7 @@ import BorrowedBooks from './components/BorrowedBooks';
 import AddBook from './components/AddBook';
 import NotFound from './components/NotFound'; // Import NotFound
 import PrivateRoute from './components/PrivateRoute'; // Import PrivateRoute
+import libraryImage from './assets/library.jpg';
 //import Loans from './components/Loans.jsx.chat';
 import './App.css';
 
@@ -43,6 +44,8 @@ const Home = () => {
     <div>
       <h2>Welcome to the Library Management System!</h2>
       {/* You can add more content here for the home page */}
+      <img src={libraryImage} alt="Library" style={{ width: '100%', maxWidth: '600px', marginTop: '20px', borderRadius: '10px' }} />
+      
     </div>
   );
 };
