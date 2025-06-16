@@ -11,33 +11,33 @@ const Navbar = () => {
 
     const handleLogout = () => {
         dispatch(logoutUser());
-        navigate('/login'); // Redirect to login after logout
+        navigate('/'); // Redirect to login after logout
     };
 
     const isAuthenticated = !!user.username; // Check for username (more reliable)
-
+    const isAdmin = isAuthenticated && user.roles && user.roles.includes('ROLE_ADMIN');
+console.log("User from Redux:", user);
     return (
         <nav className="navbar">
             <div className="navbar-links">
                 <Link to="/" className="navbar-link">Home</Link>
                 {!isAuthenticated && <Link to="/register" className="navbar-link">Register</Link>}
-                {!isAuthenticated && <Link to="/login" className="navbar-link">Login</Link>}
-                {isAuthenticated && <Link to="/addBook" className="navbar-link">Add Book</Link>}
+                {!isAuthenticated && <Link to="/login" className="navbar-link">Login</Link>}                
                 <Link to="/booksAvailable" className="navbar-link">Books Available</Link>
                 {isAuthenticated && <Link to="/borrowedBooks" className="navbar-link">My Borrowed Books</Link>}
-                {isAuthenticated && <Link to="/profile" className="navbar-link">My Profile</Link>}                                
-                
+                {isAuthenticated && <Link to="/profile" className="navbar-link">My Profile</Link>}
+                {isAuthenticated && isAdmin && <Link to="/addBook" className="navbar-link">Add Book</Link>}
+                {isAuthenticated && isAdmin && <Link to="/members" className="navbar-link">All Members</Link>} 
             </div>
             {isAuthenticated && (
                 <div className="navbar-auth">
-                    <span className="navbar-welcome">Welcome, {user.username}</span>
+                    {/*<span className="navbar-welcome">Welcome, {user.username}</span>*/}
+                    <span className="navbar-welcome">Welcome, {user.member.name}</span>
                     <button onClick={handleLogout} className="navbar-button">Logout</button>
                 </div>
             )}
         </nav>
     );
 };
-//{isAuthenticated && <Link to="/loans" className="navbar-link">My Loans</Link>}
-//{isAuthenticated && <Link to="/loans" className="navbar-link">My Loans</Link>}
 
 export default Navbar;

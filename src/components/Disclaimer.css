@@ -1,0 +1,38 @@
+/* src/components/Disclaimer.css */
+.disclaimer-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    line-height: 1.7;
+    font-size: 1.05em;
+}
+
+.disclaimer-container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+.disclaimer-container h3 {
+    color: #34495e;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.7em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.disclaimer-container p {
+    margin-bottom: 15px;
+}
+
+.disclaimer-container strong {
+    font-weight: 600;
+}

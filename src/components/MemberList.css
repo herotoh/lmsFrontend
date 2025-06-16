@@ -1,0 +1,401 @@
+/* src/components/MemberList.css */
+
+/* --- General Styling for MemberList and MemberDetails Pages --- */
+.member-list-container,
+.member-details-page-layout {
+    padding: 25px 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+/* Page Title (for MemberList) */
+.member-list-container h2 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.member-list-container h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #3498db;
+    border-radius: 1.5px;
+}
+
+/* Status messages (loading, error, no members) */
+.status-message {
+    text-align: center;
+    font-size: 0.95em;
+    color: #555;
+    margin-top: 15px;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+.status-message.error {
+    color: #c0392b;
+    background-color: #fae0e0;
+    border-color: #ebcccd;
+}
+
+/* --- Members Table Styling (for MemberList component) --- */
+.members-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.members-table thead {
+    background-color: #ecf0f1;
+}
+
+.members-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.9em;
+    color: #34495e;
+    font-weight: 600;
+    border-bottom: 1px solid #bdc3c7;
+    white-space: nowrap;
+}
+
+.members-table tbody tr {
+    border-bottom: 1px solid #f2f2f2;
+    transition: background-color 0.2s ease;
+}
+
+.members-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.members-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.members-table td {
+    padding: 10px 15px;
+    font-size: 0.9em;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+/* Action button in table cell */
+.members-table td button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3498db;
+    color: white;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.members-table td button:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+
+/* --- Styles for MemberDetails Page Layout --- */
+.member-details-page-layout {
+    display: flex;
+    gap: 25px;
+    min-height: 500px;
+}
+
+.member-details-page-layout > .member-details-container {
+    flex: 2;
+    padding: 25px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Title for Member Details Column */
+.member-details-page-layout > .member-details-container h2 {
+    text-align: left;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.member-details-page-layout > .member-details-container h2::after {
+    display: none;
+}
+
+.member-details-page-layout > .member-details-container p {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.member-details-page-layout > .member-details-container p strong {
+    display: inline-block;
+    min-width: 120px;
+    margin-right: 5px;
+    color: #444;
+}
+
+/* Member Action Buttons (Update/Delete) */
+.member-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eef2f5;
+}
+
+.member-actions button {
+    padding: 9px 18px;
+    font-size: 0.9em;
+    font-weight: 600;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.member-actions .update-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.member-actions .update-button:hover {
+    background-color: #2980b9;
+}
+
+.member-actions .delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.member-actions .delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Right Column: Member Loans */
+.member-loans-column {
+    flex: 1;
+    min-width: 280px;
+    padding: 25px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+}
+
+.member-loans-column h3 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.member-loans-column p {
+    font-size: 0.9em;
+    color: #555;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.borrowed-books-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.borrowed-loan-item {
+    background-color: #fff;
+    border: 1px solid #eef2f5;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    font-size: 0.85em;
+    color: #444;
+
+    /* NEW: Flexbox for text details and return button */
+    display: flex;
+    justify-content: space-between; /* Pushes text to left, button to right */
+    align-items: center; /* Vertically centers content */
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
+}
+
+/* NEW: Wrapper for loan text details */
+.loan-item-details {
+    flex-grow: 1; /* Allows text details to take available space */
+    margin-right: 10px; /* Space between text and button */
+    min-width: 150px; /* Ensure text details don't get too squashed */
+}
+
+
+.borrowed-loan-item strong {
+    color: #34495e;
+}
+
+.borrowed-loan-item .fine-info {
+    font-weight: 600;
+    color: #e74c3c;
+    margin-left: 5px;
+}
+
+/* NEW: Return Loan Button Styling */
+.return-loan-button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2ecc71; /* Green for Return */
+    color: white;
+    font-size: 0.8em; /* Slightly smaller for compactness */
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+    white-space: nowrap; /* Keep button text on one line */
+}
+
+.return-loan-button:hover:not(:disabled) {
+    background-color: #27ae60;
+    transform: translateY(-1px);
+}
+
+.return-loan-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 992px) {
+    .member-list-container,
+    .member-details-page-layout {
+        padding: 20px 15px;
+        margin: 15px auto;
+    }
+
+    /* Stack columns for MemberDetails page */
+    .member-details-page-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .member-details-page-layout > .member-details-container,
+    .member-loans-column {
+        flex: unset;
+        max-width: 100%;
+        min-width: unset;
+        padding: 20px;
+    }
+
+    .member-details-page-layout > .member-details-container h2 {
+        text-align: center;
+        font-size: 2em;
+    }
+    .member-details-page-layout > .member-details-container h2::after {
+        display: block;
+    }
+
+    .member-details-page-layout > .member-details-container p strong {
+        min-width: 90px;
+    }
+
+    .member-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .member-actions button {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .members-table td {
+        padding: 8px 12px;
+    }
+
+    .members-table td button {
+        padding: 7px 14px;
+    }
+
+    /* Adjust borrowed loan item for stacked layout if needed */
+    .borrowed-loan-item {
+        flex-direction: column; /* Stack text and button */
+        align-items: flex-start; /* Align stacked content to start */
+        gap: 5px; /* Space between stacked items */
+    }
+    .loan-item-details {
+        margin-right: 0; /* Remove horizontal margin */
+        width: 100%; /* Take full width */
+    }
+    .return-loan-button {
+        width: 100%; /* Make button full width when stacked */
+        max-width: 150px; /* Optional: limit width even if full width */
+        margin-top: 5px; /* Space above button */
+    }
+}
+
+@media (max-width: 600px) {
+    .member-list-container,
+    .member-details-page-layout {
+        padding: 15px 10px;
+        margin: 10px auto;
+    }
+
+    .member-details-container,
+    .member-loans-column {
+        padding: 15px;
+    }
+
+    .member-details-container h2 {
+        font-size: 1.8em;
+    }
+
+    .member-details-container p {
+        font-size: 0.9em;
+    }
+
+    .member-actions button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .borrowed-loan-item {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+    .return-loan-button {
+        padding: 8px 10px;
+        font-size: 0.75em;
+    }
+}

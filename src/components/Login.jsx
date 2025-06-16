@@ -26,7 +26,8 @@ function Login() {
             console.log('Login successful. Received login data:', loginData);
 
             // 2. Fetch full member details using the username (assumed to be member ID)
-            const memberId = loginData.username; // Backend uses username as memberId
+            //const memberId = loginData.username; // Backend uses username as memberId
+            const memberId = loginData.memberId; // Backend uses username as memberId
             const memberResponse = await api.get(`/members/${memberId}`);
             const memberData = memberResponse.data;
 
@@ -44,7 +45,8 @@ function Login() {
             dispatch(loginUser(fullUserData));
 
             // 5. Redirect to booksAvailable page
-            navigate('/booksAvailable');
+            //navigate('/booksAvailable');
+            navigate('/');
         } catch (err) {
             console.error('Login error:', err);
 

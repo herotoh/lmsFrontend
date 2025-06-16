@@ -1,87 +1,243 @@
 /* AddBook.css */
+
 .add-book-container {
-    padding: 20px;
+    padding: 30px 20px;
+    max-width: 1000px; /* Adjust max-width to accommodate two columns */
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .add-book-container h2 {
-    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 10px;
 }
 
+.add-book-container h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #007bff;
+    border-radius: 2px;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* NEW: Flex container for the form and image column */
+.add-book-content {
+    display: flex;
+    gap: 30px; /* Space between the form and image column */
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+    justify-content: center; /* Center content when wrapped */
+}
+
+/* NEW: Form column styling */
+.add-book-form {
+    flex: 2; /* Form takes more space */
+    min-width: 350px; /* Minimum width for the form */
+    max-width: 600px; /* Max width for the form */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Existing form-row styles - ensure they are present and correct */
 .form-row {
     display: flex;
-    align-items: baseline; /* Align label and input/textarea to the baseline */
-    margin-bottom: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
 }
 
 .form-row label {
-    flex-basis: 150px; /* Adjust width as needed */
-    margin-right: 10px;
+    flex-shrink: 0;
+    width: 130px; /* Fixed width for labels */
     text-align: left;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.95em;
 }
 
 .form-row input[type="text"],
 .form-row input[type="number"],
-.form-row select {
-    flex-grow: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
+.form-row select,
 .form-row textarea {
     flex-grow: 1;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: inherit; /* Inherit font to look consistent */
+    border-radius: 5px;
+    font-size: 1em;
+    max-width: calc(100% - 140px); /* Adjusted for label width + gap */
+    transition: border-color 0.3s ease;
 }
 
-.form-row.description-row {
-    align-items: flex-start; /* Align description label to the top */
+.description-row {
+    align-items: flex-start;
+}
+
+.description-row label {
+    padding-top: 5px;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .add-book-button {
-    padding: 10px 15px;
+    display: block; /* Make button full width below form rows */
+    width: 100%;
+    padding: 12px 25px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 1rem;
     margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .add-book-button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
-.error-message {
-    color: red;
-    margin-bottom: 10px;
+/* NEW: Image preview column styling */
+.image-preview-column {
+    flex: 1; /* Image column takes remaining space */
+    min-width: 250px; /* Minimum width for image column */
+    max-width: 300px; /* Max width for image column */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center; /* Center image and text */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content vertically */
+    justify-content: flex-start; /* Push content to top */
 }
 
-.success-message {
-    color: green;
-    margin-bottom: 10px;
-}
-
-/* Hover remarks */
-.form-row input:hover::after,
-.form-row select:hover::after,
-.form-row textarea:hover::after {
-    content: attr(data-remark);
-    display: block;
-    background-color: #f0f0f0;
+.image-preview-column h3 {
     color: #333;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-top: 5px;
-    font-size: 0.9rem;
-    white-space: pre-line; /* Preserve line breaks in remarks */
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    width: 100%; /* Make border stretch across */
 }
 
-/* Adjust alignment for select elements */
-.form-row select {
-    /* Add any specific styling for select if needed */
+.book-cover-preview {
+    max-width: 100%; /* Ensure image fits container */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    object-fit: contain; /* Maintain aspect ratio */
+    max-height: 350px; /* Limit height for larger images */
+}
+
+.image-preview-column p {
+    color: #666;
+    font-style: italic;
+    margin-top: 15px;
+}
+
+.image-error-message {
+    color: #dc3545;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .add-book-content {
+        flex-direction: column; /* Stack columns on smaller screens */
+        gap: 20px;
+    }
+
+    .add-book-form,
+    .image-preview-column {
+        min-width: unset; /* Remove min-width to allow full width */
+        max-width: 100%; /* Take full width */
+    }
+
+    .add-book-form {
+        order: 2; /* Put form below image preview on small screens */
+    }
+
+    .image-preview-column {
+        order: 1; /* Put image preview above form on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .add-book-container {
+        padding: 15px 10px;
+        margin: 10px auto;
+    }
+
+    .add-book-container h2 {
+        font-size: 2em;
+    }
+
+    .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .form-row label {
+        width: auto;
+        text-align: left;
+        margin-bottom: 2px;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="number"],
+    .form-row select,
+    .form-row textarea {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .description-row label {
+        padding-top: 0;
+    }
 }

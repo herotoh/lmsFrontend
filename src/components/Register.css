@@ -1,51 +1,245 @@
+/* src/components/Register.css */
+
 .register-container {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    max-width: 600px; /* Max width for the form container */
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    text-align: center; /* Center align overall content like title and prompt */
 }
 
 .register-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    padding-bottom: 10px;
 }
 
-.register-container .form-group {
-    margin-bottom: 15px;
-}
-
-.register-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.register-container input,
-.register-container select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.register-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.register-button:hover {
-    background-color: #45a049;
+.register-container h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #3498db;
+    border-radius: 2px;
 }
 
 .error-message {
-    color: red;
+    background-color: #f8d7da;
+    color: #c0392b;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #27ae60;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between form sections */
+    text-align: left; /* Align form content left */
+    margin-top: 20px;
+}
+
+.form-section {
+    background-color: #f8f9fa; /* Light background for sections */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.form-section h3 {
+    color: #34495e;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.form-row {
+    display: flex;
+    align-items: flex-start; /* Align label to top for textarea */
+    margin-bottom: 12px; /* Space between rows */
+    gap: 10px; /* Space between label and input */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.form-row label {
+    flex-shrink: 0;
+    width: 140px; /* Fixed width for labels for alignment */
+    padding-top: 8px; /* Align with text input baseline */
+    font-weight: 600;
+    color: #444;
+    font-size: 0.95em;
+}
+
+.form-row input[type="text"],
+.form-row input[type="password"],
+.form-row input[type="email"],
+.form-row input[type="date"],
+.form-row select,
+.form-row textarea {
+    flex-grow: 1; /* Allow input to take remaining space */
+    padding: 10px 12px;
+    border: 1px solid #dcdfe4;
+    border-radius: 5px;
+    font-size: 0.95em;
+    color: #333;
+    max-width: calc(100% - 160px); /* Adjust max-width based on label width + gap */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-row textarea {
+    min-height: 70px;
+    resize: vertical;
+    padding-top: 10px; /* Adjust for textarea baseline */
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.required {
+    color: #e74c3c; /* Red for required asterisk */
+    margin-left: 3px;
+}
+
+.error-text {
+    flex-basis: 100%; /* Make error text take full width below input */
+    color: #e74c3c;
+    font-size: 0.85em;
     margin-top: 5px;
+    margin-left: 150px; /* Align with input field */
+    text-align: left;
+}
+
+.register-button {
+    display: block;
+    width: 100%;
+    padding: 12px 25px;
+    background-color: #2ecc71; /* Professional green */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.register-button:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.login-prompt {
+    margin-top: 25px;
+    font-size: 0.95em;
+    color: #555;
+}
+
+.login-prompt a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .register-container {
+        padding: 25px 15px;
+        margin: 20px auto;
+    }
+
+    .register-container h2 {
+        font-size: 2em;
+    }
+
+    .form-section {
+        padding: 15px;
+    }
+
+    .form-section h3 {
+        font-size: 1.3em;
+        margin-bottom: 12px;
+    }
+
+    .form-row {
+        flex-direction: column; /* Stack label and input vertically */
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .form-row label {
+        width: auto; /* Remove fixed width */
+        padding-top: 0;
+        margin-bottom: 5px;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="password"],
+    .form-row input[type="email"],
+    .form-row input[type="date"],
+    .form-row select,
+    .form-row textarea {
+        max-width: 100%; /* Full width for inputs */
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    .error-text {
+        margin-left: 0; /* Reset margin for stacked layout */
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-container {
+        padding: 20px 10px;
+        margin: 15px auto;
+    }
+
+    .register-container h2 {
+        font-size: 1.8em;
+    }
+
+    .register-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
 }

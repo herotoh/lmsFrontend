@@ -1,49 +1,493 @@
-/* BooksAvailable.css */
-
-.books-available-container {
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+/* General container for the BooksAvailable page */
+.books-container {
+    padding: 25px 20px; /* Slightly reduced top/bottom padding */
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #ffffff; /* Pure white background */
+    border-radius: 8px; /* Slightly less rounded */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06); /* Lighter, more subtle shadow */
+    font-family: 'Inter', sans-serif; /* Professional font */
+    color: #333; /* Darker primary text color */
 }
 
-.books-available-container h2 {
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
+/* Title for the page */
+.books-title {
+    text-align: center;
+    color: #2c3e50; /* Darker, professional title color */
+    font-size: 2.2em; /* Slightly smaller for compactness */
+    margin-bottom: 25px; /* Reduced margin */
+    font-weight: 700;
+    letter-spacing: -0.5px; /* Tighter letter spacing */
+    position: relative;
+    padding-bottom: 8px; /* Reduced padding */
 }
 
-.books-list {
-  list-style-type: none;
-  padding: 0;
+.books-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px; /* Shorter underline */
+    height: 3px; /* Thinner underline */
+    background-color: #3498db; /* Professional blue */
+    border-radius: 1.5px;
 }
 
-.book-item {
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
+/* Status messages (loading, error, no books) */
+.status-message {
+    text-align: center;
+    font-size: 0.95em; /* Slightly smaller font */
+    color: #555;
+    margin-top: 15px; /* Reduced margin */
+    padding: 12px 15px; /* Reduced padding */
+    background-color: #f8f9fa; /* Lighter background */
+    border-radius: 6px; /* Slightly less rounded */
+    border: 1px solid #e9ecef; /* Lighter border */
 }
 
-.book-item:last-child {
-  border-bottom: none;
+.status-message.error {
+    color: #c0392b; /* Darker red */
+    background-color: #fae0e0;
+    border-color: #ebcccd;
 }
 
-.book-item strong {
-  font-weight: bold;
-  color: #0056b3; /* A slightly darker blue for emphasis */
+/* NEW: Category Filter Container */
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px; /* Reduced gap */
+    margin-bottom: 25px; /* Reduced margin */
+    padding: 12px 15px; /* Reduced padding */
+    background-color: #ecf0f1; /* Light grey background */
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04); /* Lighter shadow */
 }
 
-.error-message {
-  color: #d8000c;
-  background-color: #ffbaba;
-  border: 1px solid #d88282;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+/* NEW: Category Button Styling */
+.category-button {
+    padding: 8px 18px; /* Compact padding */
+    border: 1px solid #bdc3c7; /* Subtle border */
+    border-radius: 18px; /* Slightly smaller pill shape */
+    background-color: #fff;
+    color: #34495e; /* Darker text */
+    font-size: 0.9em; /* Compact font size */
+    font-weight: 500; /* Medium weight */
+    cursor: pointer;
+    transition: all 0.2s ease-out; /* Faster, smoother transition */
+    white-space: nowrap;
+    line-height: 1; /* Ensure tight line-height */
 }
 
-/* Optional: Add some styling for the loading message */
-.books-available-container p {
-  font-style: italic;
-  color: #777;
+.category-button:hover {
+    background-color: #e8f3f8; /* Lighter blue on hover */
+    transform: translateY(-1px); /* More subtle lift */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* More subtle shadow */
+}
+
+.category-button.active {
+    background-color: #3498db; /* Active blue */
+    color: white;
+    font-weight: 600; /* Slightly bolder */
+    border-color: #2980b9; /* Darker active border */
+}
+
+.category-button.active:hover {
+    background-color: #2980b9;
+}
+
+
+/* Grid layout for book cards */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Slightly smaller minmax for more cards per row */
+    gap: 20px; /* Reduced gap */
+    justify-content: center;
+    padding-top: 15px; /* Reduced padding */
+}
+
+/* Individual book card styling */
+.book-card {
+    background-color: #fff;
+    border: 1px solid #eef2f5; /* Very light border */
+    border-radius: 8px; /* Consistent border radius */
+    padding: 18px; /* Reduced padding */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04); /* Lighter shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Faster, smoother transitions */
+    text-align: center;
+}
+
+.book-card:hover {
+    transform: translateY(-3px); /* More subtle lift */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* More subtle shadow */
+}
+
+.book-details {
+    margin-bottom: 12px; /* Reduced margin */
+}
+
+.book-title {
+    font-size: 1.4em; /* Slightly smaller */
+    color: #2c3e50; /* Darker, professional title color */
+    margin-bottom: 6px; /* Reduced margin */
+    font-weight: 600;
+    line-height: 1.2; /* Tighter line height */
+}
+
+.book-author {
+    font-size: 0.9em; /* Smaller */
+    color: #7f8c8d; /* Muted grey for author */
+    margin-bottom: 8px; /* Reduced margin */
+    font-style: italic;
+}
+
+.book-copies {
+    font-size: 0.9em; /* Smaller */
+    color: #27ae60; /* Professional green */
+    font-weight: 600; /* Slightly bolder */
+}
+
+/* Action buttons container */
+.book-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px; /* Reduced gap */
+    margin-top: 15px;
+}
+
+/* Button general styling */
+.borrow-button,
+.update-button,
+.delete-button,
+.details-button {
+    padding: 8px 15px; /* Compact padding */
+    border: none;
+    border-radius: 5px; /* Slightly less rounded */
+    cursor: pointer;
+    font-size: 0.85em; /* Compact font size */
+    font-weight: 500;
+    transition: background-color 0.2s ease-out, transform 0.1s ease-out; /* Faster, smoother transitions */
+    white-space: nowrap;
+    flex: 1 1 calc(50% - 12px); /* Calc adjusted for 8px gap */
+    max-width: calc(50% - 12px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Subtle button shadow */
+}
+
+/* Borrow button styling */
+.borrow-button {
+    background-color: #3498db; /* Professional blue */
+    color: white;
+}
+
+.borrow-button:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+.borrow-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none; /* No shadow when disabled */
+}
+
+/* Update button styling */
+.update-button {
+    background-color: #f1c40f; /* Professional amber */
+    color: #333;
+}
+
+.update-button:hover {
+    background-color: #f39c12;
+    transform: translateY(-1px);
+}
+
+/* Delete button styling */
+.delete-button {
+    background-color: #e74c3c; /* Professional red */
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+
+.details-button {
+    background-color: #95a5a6; /* Professional grey */
+    color: white;
+}
+
+.details-button:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-1px);
+}
+
+
+/* Modal Styling */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Slightly lighter overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px); /* Slightly less blur */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 25px; /* Reduced padding */
+    border-radius: 10px; /* Slightly less rounded */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* More subtle shadow */
+    max-width: 600px; /* Slightly smaller max-width */
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: fadeInScale 0.2s ease-out; /* Faster animation */
+}
+
+/* Animation for modal entry */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95); /* Smaller scale effect */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Form specific styles (for UpdateBookForm using AddBook.css) */
+.add-book-container h2 { /* This applies to the main H2 in AddBook, not modal forms */
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-size: 2.2em;
+}
+/* Styles for the modal form's inner heading */
+.modal-content h2 { /* Targeting the H2 inside the modal content directly */
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.8em; /* Adjusted for modal */
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eef2f5;
+}
+
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Reduced margin */
+    gap: 8px; /* Reduced gap */
+}
+
+.form-row label {
+    flex-shrink: 0;
+    width: 120px; /* Slightly reduced width for labels */
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9em; /* Compact font size */
+    margin-bottom: 0;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"],
+.form-row select,
+.form-row textarea {
+    flex-grow: 1;
+    padding: 9px 12px; /* Compact padding */
+    border: 1px solid #dcdfe4; /* Lighter border */
+    border-radius: 5px;
+    font-size: 0.95em; /* Compact font size */
+    max-width: calc(100% - 130px); /* Adjusted for label width + gap */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.description-row {
+    align-items: flex-start;
+}
+
+.description-row label {
+    padding-top: 5px;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+    border-color: #3498db; /* Professional blue focus */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); /* Subtle focus shadow */
+}
+
+.add-book-button, .cancel-button { /* These apply to the modal form buttons */
+    padding: 10px 20px; /* Compact padding */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em; /* Compact font size */
+    font-weight: 600; /* Bolder */
+    margin-left: 8px; /* Reduced margin */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+.add-book-button {
+    background-color: #2ecc71; /* Professional green */
+    color: white;
+}
+
+.add-book-button:hover {
+    background-color: #27ae60;
+    transform: translateY(-1px);
+}
+
+.cancel-button {
+    background-color: #95a5a6; /* Professional grey */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-1px);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px; /* Reduced margin */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .books-container {
+        padding: 20px 15px;
+        margin: 15px auto;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Adjusted for smaller cards */
+        gap: 15px; /* Reduced gap */
+    }
+
+    .books-title {
+        font-size: 1.8em;
+    }
+
+    .book-title {
+        font-size: 1.2em;
+    }
+
+    .book-author, .book-copies {
+        font-size: 0.85em;
+    }
+
+    .borrow-button,
+    .update-button,
+    .delete-button,
+    .details-button {
+        padding: 7px 10px; /* Even more compact */
+        font-size: 0.8em;
+        flex: 1 1 calc(50% - 10px); /* Adjusted for 8px gap */
+        max-width: calc(50% - 10px);
+    }
+
+    .category-button {
+        padding: 7px 15px;
+        font-size: 0.85em;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin-bottom: 10px;
+    }
+
+    .form-row label {
+        width: auto;
+        text-align: left;
+        margin-bottom: 0px;
+        font-size: 0.9em;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="number"],
+    .form-row select,
+    .form-row textarea {
+        max-width: 100%;
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+    .add-book-button, .cancel-button {
+        padding: 10px 18px;
+        font-size: 0.9em;
+    }
+    .form-actions {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .books-container {
+        padding: 15px 10px;
+        margin: 10px auto;
+    }
+
+    .books-title {
+        font-size: 1.8em;
+    }
+
+    .books-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .book-card {
+        padding: 15px;
+    }
+
+    .book-title {
+        font-size: 1.2em;
+    }
+
+    .borrow-button,
+    .update-button,
+    .delete-button,
+    .details-button {
+        width: 100%;
+        margin-left: 0;
+        flex: unset;
+        max-width: unset;
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .category-button {
+        width: 100%;
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
 }

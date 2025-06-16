@@ -1,4 +1,128 @@
+/* src/App.css */
+
 .App {
-text-align: center;
-padding: 20px;
+  text-align: center;
+  /* Add position: relative to .App if it's the closest positioned ancestor,
+     otherwise the absolute positioning of social-icons-top-right will be relative to <body> */
+  position: relative; /* Make sure .App is positioned for absolute children */
+  /* Added padding-top to create space for the H1 and potentially social icons */
+  padding-top: 50px; /* Adjust this value to push content down from the top */
+}
+
+h1 {
+  margin-top: 10px; /* Keep h1 below the top padding and social icons */
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.main-content-layout {
+  padding: 20px; /* Adjust padding as needed */
+  /* min-height: calc(100vh - 150px); Adjust based on navbar/footer height */
+}
+
+/* Social Icons Top Right Container */
+.social-icons-top-right {
+    position: absolute; /* Position relative to the nearest positioned ancestor (likely .App) */
+    top: 0%; /* Distance from the top */
+    right: 15px; /* Distance from the right */
+    display: flex; /* Arrange icons in a row */
+    gap: 8px; /* Space between icons */
+    z-index: 1001; /* Ensure it's above other content like Navbar */
+}
+
+.social-icon {
+    width: 32px; /* Size of the SVG icons (adjusted to 32px for favicon size feel) */
+    height: 32px;
+    vertical-align: middle; /* Align icons nicely */
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-icons-top-right a:hover .social-icon {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.social-icons-top-right a {
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent, though SVG fills usually override */
+}
+
+/* NEW: Announcement Row Styling */
+.announcement-row {
+    background-color: hsl(0, 0%, 100%); /* Light background for the announcement */
+    color: #333; /* Dark text color */
+    padding: 8px 0; /* Vertical padding */
+    overflow: hidden; /* Hide overflowing text */
+    white-space: nowrap; /* Keep text on a single line */
+    font-size: 0.95em;
+    border-bottom: 1px solid #e0e0e0; /* Subtle border at the bottom */
+    position: relative; /* Needed for animation */
+    box-shadow: inset 0 -1px 3px rgba(0,0,0,0.05); /* Slight inner shadow */
+    margin-top: 0; /* Ensures it's snug below navbar */
+}
+
+.announcement-text {
+    color: rgb(174, 10, 13);
+    display: inline-block; /* Essential for animation to work with overflowing text */
+    padding-left: 100%; /* Start text off-screen to the right */
+    animation: scroll-left 300s linear infinite; /* Animation definition */
+    /* Adjust animation duration (30s) based on content length and desired speed */
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%); /* Start at original position */
+    }
+    100% {
+        transform: translateX(-100%); /* Move entirely off-screen to the left */
+    }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .social-icons-top-right {
+        top: 10px;
+        right: 10px;
+        gap: 5px;
+    }
+    .social-icon {
+        width: 24px; /* Reduced for smaller screens */
+        height: 24px;
+    }
+
+    /* Adjust H1 margin to avoid overlap with icons on smaller screens */
+    .App h1 {
+        margin-top: 50px; /* Push H1 down to make space for icons */
+    }
+
+    .announcement-row {
+        font-size: 0.9em;
+        padding: 6px 0;
+    }
+    .announcement-text {
+        animation-duration: 120s; /* Faster scroll on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .social-icons-top-right {
+        top: 5px;
+        right: 5px;
+        gap: 3px;
+    }
+    .social-icon {
+        width: 20px; /* Reduced for very small screens */
+        height: 20px;
+    }
+    .App h1 {
+        font-size: 1.8em; /* Adjust font size if necessary */
+        margin-top: 40px; /* Further push H1 down */
+    }
+    .announcement-row {
+        font-size: 0.8em;
+        padding: 5px 0;
+    }
+    .announcement-text {
+        animation-duration: 120s; /* Even faster scroll on very small screens */
+    }
 }

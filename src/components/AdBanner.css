@@ -1,0 +1,55 @@
+/* Styles for the GLOBAL HORIZONTAL BANNER */
+.ad-banner-container-global {
+    width: 100%; /* Take full width of its parent */
+    max-width: 728px; /* Max width for a common desktop leaderboard ad (e.g., Google AdSense) */
+    height: auto; /* Height will be determined by image aspect ratio */
+    margin: 20px auto; /* Center horizontally, provide vertical spacing */
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex; /* Use flex to center content */
+    flex-direction: column; /* Stack image and label vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center;
+    /* Removed previous column-specific styles like position: sticky, top, align-self, flex-shrink */
+}
+
+.ad-banner-container-global a { /* Specificity for the global banner's link */
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.ad-banner-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    border-radius: 8px;
+}
+
+.ad-label {
+    font-size: 1.0em;
+    color: #c60c0c;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 0 10px;
+    font-weight: bold; /* Added this line for bold font */
+}
+
+/* Responsive adjustments for the GLOBAL HORIZONTAL BANNER */
+@media (max-width: 768px) { /* Adjust breakpoint as needed for tablet/mobile */
+    .ad-banner-container-global {
+        max-width: 468px; /* Common larger mobile/tablet banner size */
+        margin: 15px auto; /* Slightly less margin for mobile */
+    }
+}
+
+@media (max-width: 480px) { /* Smaller mobile screens */
+    .ad-banner-container-global {
+        max-width: 320px; /* Common smaller mobile banner size */
+        margin: 10px auto;
+    }
+}

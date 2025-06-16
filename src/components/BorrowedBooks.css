@@ -1,46 +1,275 @@
+/* BorrowedBooks.css */
+
+/* Main Layout for Borrowed Books */
 .borrowed-books-layout {
   display: flex;
-  padding: 1rem;
-  gap: 2rem;
+  gap: 25px; /* Space between the two columns */
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 600px; /* Ensure enough height for the layout */
 }
 
+/* Left Column: List of Borrowed Books */
 .book-list-column {
-  flex: 1;
-  max-width: 300px;
-  border-right: 1px solid #ccc;
-  padding-right: 1rem;
+  flex: 1; /* Takes equal space */
+  min-width: 250px; /* Ensure it doesn't get too small */
+  max-width: 350px; /* Limit width */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-list-column h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
 }
 
 .book-list {
   list-style: none;
   padding: 0;
+  margin: 0;
+  overflow-y: auto; /* Enable scrolling for long lists */
+  flex-grow: 1; /* Allow list to fill available height */
 }
 
 .book-list-item {
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  background: #f4f4f4;
-  border-radius: 6px;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 5px; /* Slight roundness */
+  margin-bottom: 5px; /* Space between list items */
+}
+
+.book-list-item:last-child {
+  border-bottom: none;
 }
 
 .book-list-item:hover {
-  background: #e6e6e6;
+  background-color: #f0f8ff; /* Light blue on hover */
+  transform: translateX(5px);
 }
 
 .book-list-item.selected {
-  background: #d3eafd;
+  background-color: #e0f0ff; /* Slightly darker blue for selected */
+  border-left: 5px solid #007bff; /* Highlight selected item */
+  padding-left: 10px; /* Adjust padding due to border */
+  font-weight: bold;
 }
 
+.book-list-item small {
+  color: #777;
+  font-size: 0.9em;
+}
+
+/* Right Column: Book Details + Loan Info */
 .book-detail-column {
-  flex: 2;
-  padding-left: 1rem;
+  flex: 2; /* Takes more space than the list column */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  display: flex; /* Make it a flex container for its content */
+  align-items: flex-start; /* Align content to the top */
+  justify-content: center; /* Center content horizontally if it's too wide */
+  text-align: center; /* Default for "Select a book" message */
 }
 
-.book-details {
-  background: #fff7e6;
-  padding: 1rem;
+.book-detail-column p {
+    text-align: center; /* Center "Select a book" message */
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* NEW: Container for book text details and image */
+.book-details-content {
+    display: flex; /* Use flexbox to put text details and image side-by-side */
+    gap: 30px; /* Space between text and image */
+    width: 100%; /* Take full width of parent column */
+    align-items: flex-start; /* Align content to the top */
+    text-align: left; /* Reset text alignment for book details */
+}
+
+/* NEW: Container for only the textual book details */
+.book-text-details {
+    flex: 2; /* Text details take more space */
+    min-width: 250px; /* Ensure minimum width for readability */
+}
+
+.book-text-details h3 {
+  color: #333;
+  font-size: 1.6em;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.book-text-details h4 {
+  color: #555;
+  font-size: 1.3em;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 5px;
+}
+
+.book-text-details p {
+  margin-bottom: 8px;
+  font-size: 0.95em;
+  color: #444;
+  text-align: left; /* Ensure paragraphs are left-aligned */
+}
+
+.book-text-details p strong {
+  color: #222;
+  display: inline-block; /* Allows strong to have width for alignment */
+  min-width: 100px; /* Adjust as needed for label alignment */
+  margin-right: 5px;
+}
+
+
+/* NEW: Container for the book cover image */
+.book-cover-container {
+    flex: 1; /* Image container takes remaining space */
+    display: flex;
+    justify-content: center; /* Center image horizontally */
+    align-items: flex-start; /* Align image to the top */
+    padding-top: 20px; /* Add some space from the top */
+    min-width: 150px; /* Minimum width for the image column */
+    max-width: 250px; /* Maximum width for the image column */
+}
+
+.borrowed-book-cover-image {
+    max-width: 100%; /* Ensure image fits within its container */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    object-fit: contain; /* Ensures image fits without cropping */
+}
+.fine-amount-highlight {
+    font-weight: bold;
+    color: #dc3545; /* Red color */
+}
+/* Button Group */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button-group button {
+  padding: 10px 18px;
+  border: none;
   border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-group button:first-child {
+  background-color: #6c757d; /* Grey for Close */
+  color: white;
+}
+
+.button-group button:first-child:hover {
+  background-color: #5a6268;
+}
+
+.return-button {
+  background-color: #007bff; /* Blue for Return */
+  color: white;
+}
+
+.return-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .borrowed-books-layout {
+    flex-direction: column; /* Stack columns on smaller screens */
+    gap: 20px;
+  }
+
+  .book-list-column {
+    max-width: 100%; /* Allow list to take full width */
+  }
+
+  .book-detail-column {
+    flex-direction: column; /* Stack details and image */
+    text-align: left; /* Ensure text details are left-aligned */
+  }
+
+  .book-details-content {
+      flex-direction: column; /* Stack text details and image */
+      align-items: center; /* Center contents when stacked */
+      gap: 20px;
+  }
+
+  .book-cover-container {
+      width: 100%;
+      max-width: 200px; /* Limit image size when stacked */
+      padding-top: 0;
+      margin-bottom: 15px; /* Space below image when stacked */
+  }
+
+
+  .borrowed-book-cover-image {
+      max-width: 100%;
+  }
+
+  .book-text-details {
+      width: 100%; /* Take full width when stacked */
+      text-align: left;
+  }
+
+  .book-text-details p strong {
+    min-width: 80px; /* Adjust min-width for labels */
+  }
+}
+
+@media (max-width: 600px) {
+  .borrowed-books-layout {
+    padding: 20px 15px;
+    margin: 10px auto;
+  }
+
+  .book-list-column h2 {
+    font-size: 1.6em;
+  }
+
+  .book-list-item {
+    padding: 12px;
+  }
+
+  .book-detail-column {
+    padding: 20px;
+  }
+
+  .book-text-details h3 {
+    font-size: 1.4em;
+  }
+
+  .book-text-details h4 {
+    font-size: 1.2em;
+  }
+
+  .button-group button {
+    padding: 8px 12px;
+    font-size: 0.85em;
+  }
 }
